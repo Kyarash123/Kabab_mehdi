@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منوی رستوران کباب ذغالی مهدی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-blue: #1A5F7A;
+            --light-blue: #57C5B6;
+            --turquoise: #159895;
+            --cream: #F8F5E9;
+            --gold: #D4AF37;
+            --dark-blue: #0A4D68;
+        }
+        
+        body {
+            background-color: var(--cream);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(26, 95, 122, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(87, 197, 182, 0.05) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* هدر و لوگو */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            position: relative;
+        }
+        
+        .logo-placeholder {
+            width: 300px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-placeholder:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .restaurant-name {
+            font-size: 42px;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .restaurant-name:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            right: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, var(--gold), var(--light-blue), var(--gold));
+            border-radius: 2px;
+        }
+        
+        .restaurant-description {
+            font-size: 18px;
+            color: var(--primary-blue);
+            font-style: italic;
+            margin-top: 20px;
+        }
+        
+        /* بخش‌های منو */
+        .menu-category {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .category-title {
+            background: linear-gradient(to right, var(--primary-blue), var(--turquoise));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 28px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(26, 95, 122, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-title:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        
+        .category-title i {
+            margin-left: 15px;
+            font-size: 24px;
+        }
+        
+        /* آیتم‌های منو */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-right: 4px solid var(--light-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-right-color: var(--gold);
+        }
+        
+        .menu-item:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(87, 197, 182, 0.05) 0%, transparent 100%);
+            z-index: 0;
+        }
+        
+        .item-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .item-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .item-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .item-price:before {
+            content: "تومان";
+            font-size: 14px;
+            font-weight: normal;
+            color: #888;
+            margin-right: 5px;
+        }
+        
+        /* دکمه‌های فیلتر */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--light-blue);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(to right, var(--light-blue), var(--primary-blue));
+            color: white;
+            border-color: var(--primary-blue);
+        }
+        
+        /* فوتر */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 -5px 15px rgba(26, 95, 122, 0.2);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* طراحی واکنش‌گرا */
+        @media (max-width: 768px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .restaurant-name {
+                font-size: 32px;
+            }
+            
+            .logo-placeholder {
+                width: 250px;
+                height: 160px;
+                object-fit: cover;
+                border-radius: 50%;
+                img{
+                    width: 250px;
+                height: 160px;
+                }
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .restaurant-name {
+                font-size: 26px;
+            }
+            
+            .category-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 80%;
+            }
+        }
+        
+        /* تزئینات ایرانی */
+        .persian-decoration {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .decoration-1 {
+            top: 5%;
+            right: 5%;
+            background: radial-gradient(circle, var(--primary-blue) 0%, transparent 70%);
+        }
+        
+        .decoration-2 {
+            bottom: 5%;
+            left: 5%;
+            background: radial-gradient(circle, var(--light-blue) 0%, transparent 70%);
+        }
+        
+        .floating-icon {
+            position: absolute;
+            color: var(--gold);
+            opacity: 0.1;
+            font-size: 24px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- تزئینات پس‌زمینه -->
+    <div class="persian-decoration decoration-1"></div>
+    <div class="persian-decoration decoration-2"></div>
+    
+    <div class="container">
+        <!-- هدر -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                   <img src="./Logo.png" alt="Logo">
+                    <div class="floating-icon" style="top: 10px; left: 20px;"><i class="fas fa-utensils"></i></div>
+                    <div class="floating-icon" style="bottom: 10px; right: 20px;"><i class="fas fa-fire"></i></div>
+                </div>
+            </div>
+            
+            <h1 class="restaurant-name">کباب ذغالی مهدی</h1>
+            <p class="restaurant-description">کباب ذغالی مهدی ، یک طعم به یاد ماندنی</p>
+        </header>
+        
+        <!-- فیلتر دسته‌بندی -->
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">همه منو</button>
+            <button class="filter-btn" data-category="kebab">کباب</button>
+            <button class="filter-btn" data-category="breakfast">صبحانه</button>
+            <button class="filter-btn" data-category="drinks">نوشیدنی</button>
+            <button class="filter-btn" data-category="appetizer">پیش غذا</button>
+        </div>
+        
+        <!-- بخش کباب -->
+        <section class="menu-category" id="kebab">
+            <div class="category-title">
+                <i class="fas fa-fire"></i>
+                کباب‌های ویژه
+            </div>
+            
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">کوبیده گوشت</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۲۶۵</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">کوبیده مرغ</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۲۴۵</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">جوجه سینه</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۲۶۵</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">جوجه حلزونی فیله</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۳۱۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">جوجه لاری</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۲۹۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">جوجه با استخوان</div>
+                    <div class="item-description">۸۰۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۴۸۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">بال و کتف</div>
+                    <div class="item-description">۱۶۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۱۵۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">چنجه</div>
+                    <div class="item-description">۲۵۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۶۵۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">شیشلیک</div>
+                    <div class="item-description">۶۰۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۷۵۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">بختیاری</div>
+                    <div class="item-description">۳۰۰ گرم، سرو با نان تازه و سبزی</div>
+                    <div class="item-price">۴۸۰</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- بخش صبحانه -->
+        <section class="menu-category" id="breakfast">
+            <div class="category-title">
+                <i class="fas fa-coffee"></i>
+                صبحانه‌های سنتی
+            </div>
+            
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">قورمه سبزواری</div>
+                    <div class="item-description">قورمه با اصالت سبزوار</div>
+                    <div class="item-price">۲۸۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">املت رویال</div>
+                    <div class="item-description">املت مخصوص ما</div>
+                    <div class="item-price">۱۷۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">املت ساده</div>
+                    <div class="item-description">املت ساده با نان تازه</div>
+                    <div class="item-price">۱۴۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">سوسیس تخم مرغ</div>
+                    <div class="item-description">سوسیس درجه یک با تخم مرغ</div>
+                    <div class="item-price">۱۶۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">تخم مرغ و تن ماهی</div>
+                    <div class="item-description">تخم مرغ و تن ماهی درجه یک با نان تازه</div>
+                    <div class="item-price">۱۸۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">خوراک عدس</div>
+                    <div class="item-description">عدس با پختی مخصوص</div>
+                    <div class="item-price">۱۵۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">خوراک لوبیا</div>
+                    <div class="item-description">لوبیای درجه یک</div>
+                    <div class="item-price">۱۷۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">نان و پنیر و گردو</div>
+                    <div class="item-description">پنیر درجه یک با گردو و نان تازه</div>
+                    <div class="item-price">۱۵۰</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- بخش نوشیدنی -->
+        <section class="menu-category" id="drinks">
+            <div class="category-title">
+                <i class="fas fa-glass-cheers"></i>
+                نوشیدنی‌ها
+            </div>
+            
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">نوشابه شیشه ای</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۴۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">دوغ کوچک</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۵۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">نوشابه خانواده</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۷۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">دوغ بزرگ</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۸۰</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">آب معدنی</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۱۰</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- بخش پیش غذا -->
+        <section class="menu-category" id="appetizer">
+            <div class="category-title">
+                <i class="fas fa-utensils"></i>
+                پیش غذاها
+            </div>
+            
+            <div class="menu-items">
+                <div class="menu-item">
+                    <div class="item-name">ماست موسیر</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۴۵</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">زیتون پرورده</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۶۵</div>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-name">زیتون شور</div>
+                    <div class="item-description"></div>
+                    <div class="item-price">۵۰</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- فوتر -->
+        <footer class="footer">
+            <h3>رستوران کباب ذغالی مهدی</h3>
+            <p>ارتباط با ما</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                   
+            
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>تلفن ۱: ۲۲۴۶۱۹۸۰</span>
+                    <span>تلفن ۲: ۲۴۶۱۸۳۱</span>
+                    <span>مدیریت: ۰۹۱۲۵۸۷۱۴۷۵</span>
+                </div>
+                <div class="contact-item">
+                   
+                </div>
+            </div>
+            
+        
+        </footer>
+    </div>
+
+    <script>
+        // فیلتر کردن آیتم‌های منو
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // حذف کلاس active از همه دکمه‌ها
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // اضافه کردن کلاس active به دکمه کلیک شده
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // نمایش/پنهان کردن دسته‌ها بر اساس فیلتر
+                document.querySelectorAll('.menu-category').forEach(section => {
+                    if (category === 'all' || section.id === category) {
+                        section.style.display = 'block';
+                        // انیمیشن ظاهر شدن
+                        section.style.animation = 'fadeInUp 0.8s ease';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // افزودن انیمیشن‌های جزئی به آیتم‌های منو هنگام بارگذاری
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach((item, index) => {
+                // تأخیر برای ایجاد انیمیشن آبشاری
+                item.style.animationDelay = `${index * 0.05}s`;
+            });
+            
+            // شناور کردن آیتم‌های منو با تأخیر متفاوت
+            const floatingIcons = document.querySelectorAll('.floating-icon');
+            floatingIcons.forEach((icon, index) => {
+                icon.style.animationDelay = `${index * 0.5}s`;
+            });
+        });
+        
+        // انیمیشن برای تیتر دسته‌ها هنگام اسکرول
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease';
+                }
+            });
+        }, observerOptions);
+        
+        // مشاهده تمام بخش‌های منو
+        document.querySelectorAll('.menu-category').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
